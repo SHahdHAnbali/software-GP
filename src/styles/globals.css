@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body bg-obsidian text-ivory antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-obsidian;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gallery-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gallery-400;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gallery-500 hover:bg-gallery-400 text-ivory font-body font-medium px-6 py-2.5 rounded-sm
+           transition-all duration-200 tracking-wide text-sm uppercase letter-spacing-widest
+           border border-gallery-500 hover:border-gallery-400 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent hover:bg-gallery-950 text-ivory font-body font-medium px-6 py-2.5 rounded-sm
+           transition-all duration-200 tracking-wide text-sm uppercase
+           border border-ivory/30 hover:border-gallery-400 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply bg-red-900/50 hover:bg-red-800 text-red-200 font-body font-medium px-6 py-2.5 rounded-sm
+           transition-all duration-200 tracking-wide text-sm uppercase
+           border border-red-800 hover:border-red-600 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .input-field {
+    @apply w-full bg-gallery-950/50 border border-gallery-700/50 text-ivory placeholder-gallery-600
+           px-4 py-3 rounded-sm font-body text-sm focus:outline-none focus:border-gallery-400
+           focus:ring-1 focus:ring-gallery-400/30 transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-gallery-950/40 border border-gallery-800/30 rounded-sm backdrop-blur-sm;
+  }
+
+  .glass-panel {
+    @apply bg-obsidian/80 backdrop-blur-xl border border-gallery-800/30;
+  }
+
+  .label {
+    @apply block text-xs font-body font-medium text-gallery-400 uppercase tracking-widest mb-2;
+  }
+
+  .page-title {
+    @apply font-display text-4xl md:text-5xl text-ivory mb-2;
+  }
+
+  .section-title {
+    @apply font-display text-2xl text-ivory mb-1;
+  }
+
+  .text-muted {
+    @apply text-gallery-400 font-body text-sm;
+  }
+}
+
+@layer utilities {
+  .letter-spacing-widest {
+    letter-spacing: 0.15em;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #d4bfa0 0%, #f8f5f0 50%, #c09a72 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-shimmer {
+    border-image: linear-gradient(135deg, transparent, #9a6642, transparent) 1;
+  }
+
+  .gallery-noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.15;
+  }
+}
+
+/* Custom range slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: theme('colors.gallery.800');
+  border-radius: 2px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: theme('colors.gallery.400');
+  cursor: pointer;
+  border: 2px solid theme('colors.gallery.600');
+  transition: background 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: theme('colors.gallery.300');
+}
+
+/* 3D Canvas */
+canvas {
+  display: block;
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(192, 154, 114, 0.1) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Loader */
+.loader {
+  border: 2px solid rgba(192, 154, 114, 0.1);
+  border-top-color: theme('colors.gallery.400');
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
